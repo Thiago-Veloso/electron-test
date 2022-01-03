@@ -1,6 +1,6 @@
 <div class="content-grid">
-  <div class="toolbar-main">
-    <div class="btn-tool">__</div>
+  <div class="toolbar-main" *ngIf="electronService.isElectronApp">
+    <div class="btn-tool" (click)="minimizableWindow()">__</div>
     <div class="btn-tool">[__]</div>
     <div class="btn-tool">X</div>
   </div>
