@@ -10,9 +10,10 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
     },
-    frame: false
+    frame: false,
+    icon: path.join(__dirname, `/icon.png`)
   });
 
   win.loadURL(
@@ -23,7 +24,7 @@ function createWindow() {
     })
   );
   // Open the DevTools.
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   win.on("closed", function () {
     win = null;
