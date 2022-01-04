@@ -2,19 +2,20 @@ const { app, BrowserWindow } = require("electron");
 const url = require("url");
 const path = require("path");
 
-let mainWindow;
+let win;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1000,
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true
     },
     frame: false
   });
 
-  mainWindow.loadURL(
+  win.loadURL(
     url.format({
       pathname: path.join(__dirname, `/dist/electron-test/index.html`),
       protocol: "file:",
@@ -22,10 +23,10 @@ function createWindow() {
     })
   );
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  win.webContents.openDevTools();
 
-  mainWindow.on("closed", function () {
-    mainWindow = null;
+  win.on("closed", function () {
+    win = null;
   });
 }
 
@@ -36,5 +37,5 @@ app.on("window-all-closed", function () {
 });
 
 app.on("activate", function () {
-  if (mainWindow === null) createWindow();
+  if (win === null) createWindow();
 });

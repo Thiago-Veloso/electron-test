@@ -9,14 +9,26 @@ import { ElectronService } from 'ngx-electron';
 export class AppComponent {
   title = 'electron-test';
 
-  constructor(public electronService: ElectronService) {
-    console.log(this.electronService.isElectronApp);
+  constructor(public electronService: ElectronService) {}
+
+  public minimizeWindow() {
+    if (this.electronService.isElectronApp)
+      this.electronService.remote.BrowserWindow.getFocusedWindow()?.minimize();
   }
 
-  public minimizableWindow() {
+  public closeWindow() {
+    if (this.electronService.isElectronApp)
+      this.electronService.remote.BrowserWindow.getFocusedWindow()?.close();
+  }
+
+  public maximizeWindow() {
     if (this.electronService.isElectronApp) {
-      console.log(this.electronService.remote.BrowserWindow);
-      this.electronService.remote.BrowserWindow.getFocusedWindow()?.minimize();
+      if (
+        this.electronService.remote.BrowserWindow.getFocusedWindow()?.isMaximized()
+      )
+        this.electronService.remote.BrowserWindow.getFocusedWindow()?.unmaximize();
+      else
+        this.electronService.remote.BrowserWindow.getFocusedWindow()?.maximize();
     }
   }
 }
